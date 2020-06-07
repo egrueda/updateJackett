@@ -1,8 +1,8 @@
 #!/bin/bash
-# updateJacket.sh 1.0
+# Actualizador de Jackett para Raspberry Pi OS version 1.1
 # Este script descarga e instala la última versión de Jackett
 
-echo "Actualizado de Jackett para Raspberry Pi OS"
+echo "Actualizador de Jackett para Raspberry Pi OS"
 echo
 
 # Ajustar al entorno
@@ -83,8 +83,9 @@ sudo systemctl stop jackett
 if [ $? -ne 0 ]; then echo "Error al detener Jackett"; exit 1; fi
 
 # Descomprimir en /opt/Jackett
-echo "Descomprimiendo $JACKETT_TARBALL"
-tar zxf /tmp/$JACKETT_TARBALL -C /opt --checkpoint=.100
+echo -n "Descomprimiendo $JACKETT_TARBALL "
+PARENTDIR=`dirname $JACKETT_PATH`
+tar zxf /tmp/$JACKETT_TARBALL -C $PARENTDIR --checkpoint=.100
 if [ $? -ne 0 ]; then echo "Error al descomprimir el archivo"; exit 1; fi
 echo
 
